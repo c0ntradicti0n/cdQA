@@ -14,7 +14,7 @@ CORS(app)
 dataset_path = os.environ["dataset_path"]
 reader_path = os.environ["reader_path"]
 
-df = pd.read_csv(dataset_path, converters={"paragraphs": literal_eval})
+df = pdf_converter(directory_path=dataset_path)
 df = filter_paragraphs(df)
 
 cdqa_pipeline = QAPipeline(reader=reader_path)

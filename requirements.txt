@@ -1,12 +1,12 @@
 Flask==1.1.1
 flask_cors==3.0.8
-joblib==0.13.2
+joblib
 pandas==0.25.0
 prettytable==0.7.2
 transformers==2.1.1
-scikit_learn==0.21.2
+scikit_learn
 tika==1.19
-torch==1.2.0
+torch
 markdown==3.1.1
 tqdm==4.32.2
 wget==3.2
