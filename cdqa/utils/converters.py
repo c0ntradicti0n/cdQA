@@ -170,6 +170,7 @@ def pdf_converter(directory_path, min_length=200, include_line_breaks=False):
     for i, pdf in enumerate(list_pdf):
         try:
             df.loc[i] = [pdf.replace(".pdf",''), None]
+
             raw = parser.from_file(os.path.join(directory_path, pdf))
             s = raw["content"].strip()
             paragraphs = re.split("\n\n(?=\u2028|[A-Z-0-9])", s)
@@ -203,8 +204,8 @@ def pdf_converter(directory_path, min_length=200, include_line_breaks=False):
                     if temp_para:
                         list_par.append(temp_para.strip())
 
-            df.loc[i, "paragraphs"] = list_par
-        except:
+            df.at[i, "paragraphs"] = list_par
+        except Exception as e:
             print("Unexpected error:", sys.exc_info()[0])
             print("Unable to process file {}".format(pdf))
     return df

@@ -5,6 +5,7 @@ import os
 from ast import literal_eval
 import pandas as pd
 
+from cdqa.utils.converters import pdf_converter
 from cdqa.utils.filters import filter_paragraphs
 from cdqa.pipeline import QAPipeline
 
@@ -15,6 +16,7 @@ dataset_path = os.environ["dataset_path"]
 reader_path = os.environ["reader_path"]
 
 df = pdf_converter(directory_path=dataset_path)
+df = df[~df['paragraphs'].isnull()]
 df = filter_paragraphs(df)
 
 cdqa_pipeline = QAPipeline(reader=reader_path)
