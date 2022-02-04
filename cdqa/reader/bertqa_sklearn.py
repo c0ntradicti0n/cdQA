@@ -1292,7 +1292,10 @@ class BertQA(BaseEstimator):
         else:
             train_sampler = DistributedSampler(train_data)
         train_dataloader = DataLoader(
-            train_data, sampler=train_sampler, batch_size=self.train_batch_size
+            train_data,
+            sampler=train_sampler,
+            batch_size=self.train_batch_size,
+            num_workers=0
         )
 
         num_train_optimization_steps = (
@@ -1449,7 +1452,12 @@ class BertQA(BaseEstimator):
                                   all_example_index, all_cls_index, all_p_mask)
         # Run prediction for full data
         eval_sampler = SequentialSampler(eval_data)
-        eval_dataloader = DataLoader(eval_data, sampler=eval_sampler, batch_size=self.predict_batch_size)
+        eval_dataloader = DataLoader(
+            eval_data,
+            sampler=eval_sampler,
+            batch_size=self.predict_batch_size,
+            num_workers=0
+        )
 
         torch.multiprocessing.set_start_method('spawn', force=True)
 
