@@ -30,11 +30,11 @@ cdqa_pipeline.fit_retriever(df=df)
 """
 The function that will be called when the processor processes.
 """
-def f(intent=None, **other_arguments_from_context):
+def f(intent=None, userinput=None, **other_arguments_from_context):
     if not intent:
         raise ValueError("A key named 'intent' must be set in the contexts map!")
 
-    prediction = cdqa_pipeline.predict(query=intent)
+    prediction = cdqa_pipeline.predict(query=userinput if userinput else intent)
 
     """ Return values get collecteĸd in a dict, that will be 
         written into the context after this processing step"""
