@@ -2,6 +2,9 @@ import os
 from cdqa.utils.converters import pdf_converter
 from cdqa.utils.filters import filter_paragraphs
 from cdqa.pipeline import QAPipeline
+from cdqa.utils.download import download_model
+
+download_model(os.environ["reader_path"], dir='/cache/')
 
 if "torch_spawn" in os.environ["gpu"]:
     import torch
