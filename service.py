@@ -3,6 +3,9 @@ from cdqa.utils.converters import pdf_converter
 from cdqa.utils.filters import filter_paragraphs
 from cdqa.pipeline import QAPipeline
 
+if "torch_spawn" in os.environ["gpu"]:
+    import torch
+    torch.multiprocessing.set_start_method('spawn')
 
 """
 Preparation
