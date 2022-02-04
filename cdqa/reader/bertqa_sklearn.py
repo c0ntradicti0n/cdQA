@@ -1451,6 +1451,8 @@ class BertQA(BaseEstimator):
         eval_sampler = SequentialSampler(eval_data)
         eval_dataloader = DataLoader(eval_data, sampler=eval_sampler, batch_size=self.predict_batch_size)
 
+        torch.multiprocessing.set_start_method('spawn', force=True)
+
         self.model.to(self.device)
         self.model.eval()
         all_results = []
