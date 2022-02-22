@@ -37,6 +37,11 @@ def f(intent=None, userinput=None, **other_arguments_from_context):
 
     """ Return values get collecteĸd in a dict, that will be 
         written into the context after this processing step"""
+
+    del cdqa_pipeline
+    if torch.cuda.is_available():
+        torch.cuda.empty_cache()
+
     return {
         "question": question,
         "answer": prediction[0],
