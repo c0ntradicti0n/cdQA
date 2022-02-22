@@ -23,14 +23,13 @@ df = pdf_converter(directory_path=dataset_path)
 df = df[~df['paragraphs'].isnull()]
 df = filter_paragraphs(df)
 
-cdqa_pipeline = QAPipeline(reader=reader_path)
-cdqa_pipeline.fit_retriever(df=df)
-
-
 """
 The function that will be called when the processor processes.
 """
 def f(intent=None, userinput=None, **other_arguments_from_context):
+    cdqa_pipeline = QAPipeline(reader=reader_path)
+    cdqa_pipeline.fit_retriever(df=df)
+
     if not intent:
         raise ValueError("A key named 'intent' must be set in the contexts map!")
     question = userinput if userinput else intent
